@@ -75,93 +75,105 @@ int resize_uniform(cv::Mat& src, cv::Mat& dst, cv::Size dst_size, object_rect& e
     return 0;
 }
 
-const int color_list[80][3] =
-    {
-        //{255 ,255 ,255}, //bg
-        {216, 82, 24},
-        {236, 176, 31},
-        {125, 46, 141},
-        {118, 171, 47},
-        {76, 189, 237},
-        {238, 19, 46},
-        {76, 76, 76},
-        {153, 153, 153},
-        {255, 0, 0},
-        {255, 127, 0},
-        {190, 190, 0},
-        {0, 255, 0},
-        {0, 0, 255},
-        {170, 0, 255},
-        {84, 84, 0},
-        {84, 170, 0},
-        {84, 255, 0},
-        {170, 84, 0},
-        {170, 170, 0},
-        {170, 255, 0},
-        {255, 84, 0},
-        {255, 170, 0},
-        {255, 255, 0},
-        {0, 84, 127},
-        {0, 170, 127},
-        {0, 255, 127},
-        {84, 0, 127},
-        {84, 84, 127},
-        {84, 170, 127},
-        {84, 255, 127},
-        {170, 0, 127},
-        {170, 84, 127},
-        {170, 170, 127},
-        {170, 255, 127},
-        {255, 0, 127},
-        {255, 84, 127},
-        {255, 170, 127},
-        {255, 255, 127},
-        {0, 84, 255},
-        {0, 170, 255},
-        {0, 255, 255},
-        {84, 0, 255},
-        {84, 84, 255},
-        {84, 170, 255},
-        {84, 255, 255},
-        {170, 0, 255},
-        {170, 84, 255},
-        {170, 170, 255},
-        {170, 255, 255},
-        {255, 0, 255},
-        {255, 84, 255},
-        {255, 170, 255},
-        {42, 0, 0},
-        {84, 0, 0},
-        {127, 0, 0},
-        {170, 0, 0},
-        {212, 0, 0},
-        {255, 0, 0},
-        {0, 42, 0},
-        {0, 84, 0},
-        {0, 127, 0},
-        {0, 170, 0},
-        {0, 212, 0},
-        {0, 255, 0},
-        {0, 0, 42},
-        {0, 0, 84},
-        {0, 0, 127},
-        {0, 0, 170},
-        {0, 0, 212},
-        {0, 0, 255},
-        {0, 0, 0},
-        {36, 36, 36},
-        {72, 72, 72},
-        {109, 109, 109},
-        {145, 145, 145},
-        {182, 182, 182},
-        {218, 218, 218},
-        {0, 113, 188},
-        {80, 182, 188},
-        {127, 127, 0},
+const int color_list[80][3] = {
+    //{255 ,255 ,255}, //bg
+    {216, 82, 24},
+    {236, 176, 31},
+    {125, 46, 141},
+    {118, 171, 47},
+    {76, 189, 237},
+    {238, 19, 46},
+    {76, 76, 76},
+    {153, 153, 153},
+    {255, 0, 0},
+    {255, 127, 0},
+    {190, 190, 0},
+    {0, 255, 0},
+    {0, 0, 255},
+    {170, 0, 255},
+    {84, 84, 0},
+    {84, 170, 0},
+    {84, 255, 0},
+    {170, 84, 0},
+    {170, 170, 0},
+    {170, 255, 0},
+    {255, 84, 0},
+    {255, 170, 0},
+    {255, 255, 0},
+    {0, 84, 127},
+    {0, 170, 127},
+    {0, 255, 127},
+    {84, 0, 127},
+    {84, 84, 127},
+    {84, 170, 127},
+    {84, 255, 127},
+    {170, 0, 127},
+    {170, 84, 127},
+    {170, 170, 127},
+    {170, 255, 127},
+    {255, 0, 127},
+    {255, 84, 127},
+    {255, 170, 127},
+    {255, 255, 127},
+    {0, 84, 255},
+    {0, 170, 255},
+    {0, 255, 255},
+    {84, 0, 255},
+    {84, 84, 255},
+    {84, 170, 255},
+    {84, 255, 255},
+    {170, 0, 255},
+    {170, 84, 255},
+    {170, 170, 255},
+    {170, 255, 255},
+    {255, 0, 255},
+    {255, 84, 255},
+    {255, 170, 255},
+    {42, 0, 0},
+    {84, 0, 0},
+    {127, 0, 0},
+    {170, 0, 0},
+    {212, 0, 0},
+    {255, 0, 0},
+    {0, 42, 0},
+    {0, 84, 0},
+    {0, 127, 0},
+    {0, 170, 0},
+    {0, 212, 0},
+    {0, 255, 0},
+    {0, 0, 42},
+    {0, 0, 84},
+    {0, 0, 127},
+    {0, 0, 170},
+    {0, 0, 212},
+    {0, 0, 255},
+    {0, 0, 0},
+    {36, 36, 36},
+    {72, 72, 72},
+    {109, 109, 109},
+    {145, 145, 145},
+    {182, 182, 182},
+    {218, 218, 218},
+    {0, 113, 188},
+    {80, 182, 188},
+    {127, 127, 0},
 };
 
 void draw_bboxes(const cv::Mat& bgr, const std::vector<BoxInfo>& bboxes, object_rect effect_roi) {
-    static const char* class_names[] = {"class_1", "class_2"};
+    static const char* class_names[] = {"person", "bicycle", "car", "motorcycle", "airplane", "bus",
+                                        "train", "truck", "boat", "traffic light", "fire hydrant",
+                                        "stop sign", "parking meter", "bench", "bird", "cat", "dog",
+                                        "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe",
+                                        "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee",
+                                        "skis", "snowboard", "sports ball", "kite", "baseball bat",
+                                        "baseball glove", "skateboard", "surfboard", "tennis racket",
+                                        "bottle", "wine glass", "cup", "fork", "knife", "spoon", "bowl",
+                                        "banana", "apple", "sandwich", "orange", "broccoli", "carrot",
+                                        "hot dog", "pizza", "donut", "cake", "chair", "couch",
+                                        "potted plant", "bed", "dining table", "toilet", "tv", "laptop",
+                                        "mouse", "remote", "keyboard", "cell phone", "microwave", "oven",
+                                        "toaster", "sink", "refrigerator", "book", "clock", "vase",
+                                        "scissors", "teddy bear", "hair drier", "toothbrush"};
 
     cv::Mat image        = bgr.clone();
     int     src_w        = image.cols;
@@ -173,9 +185,9 @@ void draw_bboxes(const cv::Mat& bgr, const std::vector<BoxInfo>& bboxes, object_
 
     for (size_t i = 0; i < bboxes.size(); i++) {
         const BoxInfo& bbox = bboxes[i];
-        if (bbox.label >= 1) {
-            continue;
-        }
+        // if (bbox.label >= 1) {
+        //     continue;
+        // }
         cv::Scalar color = cv::Scalar(color_list[bbox.label][0], color_list[bbox.label][1], color_list[bbox.label][2]);
         // fprintf(stderr, "%d = %.5f at %.2f %.2f %.2f %.2f\n", bbox.label, bbox.score,
         //     bbox.x1, bbox.y1, bbox.x2, bbox.y2);
@@ -203,7 +215,7 @@ void draw_bboxes(const cv::Mat& bgr, const std::vector<BoxInfo>& bboxes, object_
     }
 
     cv::imshow("image", image);
-    cv::resizeWindow("image", 640, 360);
+    cv::resizeWindow("image", src_w, src_h);
 }
 
 int image_demo(NanoDet& detector, const char* imagepath) {
@@ -233,8 +245,8 @@ int image_demo(NanoDet& detector, const char* imagepath) {
 int webcam_demo(NanoDet& detector, int cam_id) {
     cv::Mat          image;
     cv::VideoCapture cap(cam_id);
-    int width  = detector.input_size[0];
-    int height = detector.input_size[1];
+    int              width  = detector.input_size[0];
+    int              height = detector.input_size[1];
 
     double time_min = DBL_MAX;
     double time_max = -DBL_MAX;
@@ -264,8 +276,8 @@ int webcam_demo(NanoDet& detector, int cam_id) {
 int video_demo(NanoDet& detector, const char* path) {
     cv::Mat          image;
     cv::VideoCapture cap(path);
-    int width  = detector.input_size[0];
-    int height = detector.input_size[1];
+    int              width  = detector.input_size[0];
+    int              height = detector.input_size[1];
 
     double time_min = DBL_MAX;
     double time_max = -DBL_MAX;
@@ -283,16 +295,15 @@ int video_demo(NanoDet& detector, const char* path) {
         object_rect effect_roi;
         cv::Mat     resized_img;
         resize_uniform(image, resized_img, cv::Size(width, height), effect_roi);
-        auto results = detector.detect(resized_img, 0.6, 0.5);
+        auto results = detector.detect(resized_img, 0.35, 0.0);
         cout << "detect time: " << ncnn::get_current_time() - start << endl;
 
         start = ncnn::get_current_time();
         draw_bboxes(image, results, effect_roi);
         cout << "draw time: " << ncnn::get_current_time() - start << endl;
         start = ncnn::get_current_time();
-        cv::waitKey(0);
+        cv::waitKey(1);
 
-        
         // if (ncnn::get_current_time() - start >= 3000) {
         //     float fps =  (idx - start_idx) / ((ncnn::get_current_time() - start) / 1000);
         //     cout << idx - start_idx << "frames passed" << endl;
@@ -308,8 +319,8 @@ int video_demo(NanoDet& detector, const char* path) {
 int benchmark(NanoDet& detector) {
     int loop_num = 100;
     int warm_up  = 8;
-    int width  = detector.input_size[0];
-    int height = detector.input_size[1];
+    int width    = detector.input_size[0];
+    int height   = detector.input_size[1];
 
     double    time_min = DBL_MAX;
     double    time_max = -DBL_MAX;

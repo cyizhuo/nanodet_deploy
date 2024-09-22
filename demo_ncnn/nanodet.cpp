@@ -66,6 +66,7 @@ NanoDet::NanoDet(const char* param, const char* bin, bool useGPU) {
 #endif
     this->Net->opt.use_vulkan_compute  = this->hasGPU && useGPU;
     this->Net->opt.use_fp16_arithmetic = true;
+    this->Net->opt.num_threads         = 12;
     this->Net->load_param(param);
     this->Net->load_model(bin);
 }
@@ -95,7 +96,7 @@ std::vector<BoxInfo> NanoDet::detect(cv::Mat image, float score_threshold, float
     auto ex = this->Net->create_extractor();
     // ex.set_light_mode(false);
     ex.set_light_mode(true);
-    ex.set_num_threads(4);
+    // ex.set_num_threads(4);
 #if NCNN_VULKAN
     ex.set_vulkan_compute(this->hasGPU);
 #endif
@@ -130,6 +131,26 @@ std::vector<BoxInfo> NanoDet::detect(cv::Mat image, float score_threshold, float
     return dets;
 }
 
+// ncnn::Mat get_column(const ncnn::Mat& mat, int col) {
+//     ncnn::Mat column(mat.h, 1);  // 创建一个新的 Mat 以存储列数据
+//     for (int r = 0; r < mat.h; r++) {
+//         column[r] = mat.row(r)[col];  // 逐行提取指定列
+//     }
+//     return column;
+// }
+
+float* get_column(const ncnn::Mat& mat, int col) {
+    // 分配内存以存储列数据
+    float* column = new float[mat.h];
+
+    // 逐行提取指定列的数据
+    for (int r = 0; r < mat.h; r++) {
+        column[r] = mat.row(r)[col];
+    }
+
+    return column;  // 返回指向列数据的指针
+}
+
 void NanoDet::decode_infer(ncnn::Mat& feats, std::vector<CenterPrior>& center_priors, float threshold, std::vector<std::vector<BoxInfo>>& results) {
     const int num_points = center_priors.size();
     // printf("num_points:%d\n", num_points);
@@ -140,7 +161,8 @@ void NanoDet::decode_infer(ncnn::Mat& feats, std::vector<CenterPrior>& center_pr
         const int ct_y   = center_priors[idx].y;
         const int stride = center_priors[idx].stride;
 
-        const float* scores    = feats.row(idx);
+        // const float* scores    = feats.row(idx);
+        const float* scores    = get_column(feats, idx);
         float        score     = 0;
         int          cur_label = 0;
         for (int label = 0; label < this->num_class; label++) {
@@ -150,8 +172,9 @@ void NanoDet::decode_infer(ncnn::Mat& feats, std::vector<CenterPrior>& center_pr
             }
         }
         if (score > threshold) {
-            // std::cout << "label:" << cur_label << " score:" << score << std::endl;
-            const float* bbox_pred = feats.row(idx) + this->num_class;
+            // printf("label: %d, score: %f\n", cur_label, score);
+            // const float* bbox_pred = feats.row(idx) + this->num_class;
+            const float* bbox_pred = get_column(feats, idx) + this->num_class;
             results[cur_label].push_back(this->disPred2Bbox(bbox_pred, cur_label, score, ct_x, ct_y, stride));
             // debug_heatmap.at<cv::Vec3b>(row, col)[0] = 255;
             // cv::imshow("debug", debug_heatmap);

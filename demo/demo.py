@@ -96,6 +96,7 @@ def main():
     local_rank = 0
     torch.backends.cudnn.enabled = True
     torch.backends.cudnn.benchmark = True
+    torch.set_num_threads(12)
 
     load_config(cfg, args.config)
     logger = Logger(local_rank, use_tensorboard=False)

@@ -20,7 +20,7 @@ endif()
 find_package(OpenCV REQUIRED)
 
 # SET(ncnn_DIR /home/usr/ncnn/build/install/lib/cmake/ncnn)
-SET(ncnn_DIR /mnt/d/libs/ncnn/build/install/lib/cmake/ncnn)
+# SET(ncnn_DIR /mnt/d/libs/ncnn/build/install/lib/cmake/ncnn)
 find_package(ncnn REQUIRED)
 if(NOT TARGET ncnn)
     message(WARNING "ncnn NOT FOUND!  Please set ncnn_DIR environment variable")

@@ -41,13 +41,26 @@ public:
     ncnn::Net*      Net;
     static bool     hasGPU;
     // modify these parameters to the same with your config if you want to use your own model
-    int              input_size[2] = {320, 320};   // input height and width
-    int              num_class     = 2;            // number of classes. 80 for COCO
+    int              input_size[2] = {416, 416};   // input height and width
+    int              num_class     = 80;           // number of classes. 80 for COCO
     int              reg_max       = 7;            // `reg_max` set in the training config. Default: 7.
     std::vector<int> strides       = {8, 16, 32};  // strides of the multi-level feature.
 
     std::vector<BoxInfo>     detect(cv::Mat image, float score_threshold, float nms_threshold);
-    std::vector<std::string> labels{"class_1", "class_2"};
+    std::vector<std::string> labels{"person", "bicycle", "car", "motorcycle", "airplane", "bus",
+                                    "train", "truck", "boat", "traffic light", "fire hydrant",
+                                    "stop sign", "parking meter", "bench", "bird", "cat", "dog",
+                                    "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe",
+                                    "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee",
+                                    "skis", "snowboard", "sports ball", "kite", "baseball bat",
+                                    "baseball glove", "skateboard", "surfboard", "tennis racket",
+                                    "bottle", "wine glass", "cup", "fork", "knife", "spoon", "bowl",
+                                    "banana", "apple", "sandwich", "orange", "broccoli", "carrot",
+                                    "hot dog", "pizza", "donut", "cake", "chair", "couch",
+                                    "potted plant", "bed", "dining table", "toilet", "tv", "laptop",
+                                    "mouse", "remote", "keyboard", "cell phone", "microwave", "oven",
+                                    "toaster", "sink", "refrigerator", "book", "clock", "vase",
+                                    "scissors", "teddy bear", "hair drier", "toothbrush"};
 
 private:
     void        preprocess(cv::Mat& image, ncnn::Mat& in);
