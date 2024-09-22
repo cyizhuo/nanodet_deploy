@@ -6,30 +6,24 @@ This project provides NanoDet image inference, webcam inference and benchmark us
 # How to build
 
 ## Windows
+### Step1.
+Download and Install Visual Studio from https://visualstudio.microsoft.com/vs/community/
 
-### Step1
+### Step2.
+Download and install OpenCV from https://github.com/opencv/opencv/releases
 
-Download and Install Visual Studio from <https://visualstudio.microsoft.com/vs/community/>
+### Step3 (Optional).
+Download and install Vulkan SDK from https://vulkan.lunarg.com/sdk/home
 
-### Step2
-
-Download and install OpenCV from <https://github.com/opencv/opencv/releases>
-
-### Step3 (Optional)
-
-Download and install Vulkan SDK from <https://vulkan.lunarg.com/sdk/home>
-
-### Step4
-
+### Step4.
 Clone NCNN repository
 
 ``` shell script
 git clone --recursive https://github.com/Tencent/ncnn.git
 ```
-
 Build NCNN following this tutorial: [Build for Windows x64 using VS2017](https://github.com/Tencent/ncnn/wiki/how-to-build#build-for-windows-x64-using-visual-studio-community-2017)
 
-### Step5
+### Step5.
 
 Add `ncnn_DIR` = `YOUR_NCNN_PATH/build/install/lib/cmake/ncnn` to system environment variables.
 
@@ -44,16 +38,13 @@ msbuild nanodet_demo.vcxproj /p:configuration=release /p:platform=x64
 
 ## Linux
 
-### Step1
+### Step1.
+Build and install OpenCV from https://github.com/opencv/opencv
 
-Build and install OpenCV from <https://github.com/opencv/opencv>
+### Step2(Optional).
+Download Vulkan SDK from https://vulkan.lunarg.com/sdk/home
 
-### Step2(Optional)
-
-Download Vulkan SDK from <https://vulkan.lunarg.com/sdk/home>
-
-### Step3
-
+### Step3.
 Clone NCNN repository
 
 ``` shell script
@@ -62,7 +53,7 @@ git clone --recursive https://github.com/Tencent/ncnn.git
 
 Build NCNN following this tutorial: [Build for Linux / NVIDIA Jetson / Raspberry Pi](https://github.com/Tencent/ncnn/wiki/how-to-build#build-for-linux)
 
-### Step4
+### Step4.
 
 Set environment variables. Run:
 
@@ -82,7 +73,6 @@ make
 # Run demo
 
 Download NanoDet ncnn model.
-
 * [NanoDet-Plus ncnn model download link](https://drive.google.com/file/d/1cuVBJiFKwyq1-l3AwHoP2boTesUQP-6K/view?usp=sharing)
 
 Unzip the file and rename the file to `nanodet.param` and `nanodet.bin`, then copy them to demo program folder (`demo_ncnn/build`).
@@ -110,7 +100,6 @@ Unzip the file and rename the file to `nanodet.param` and `nanodet.bin`, then co
 ```shell script
 ./nanodet_demo 3 0
 ```
-
 ![bench_mark](benchmark.jpg)
 ****
 
@@ -145,9 +134,9 @@ Run **onnx2ncnn** in ncnn tools to generate ncnn .param and .bin file.
 
 After that, using **ncnnoptimize** to optimize ncnn model.
 
-If you have quentions about converting ncnn model, refer to ncnn wiki. <https://github.com/Tencent/ncnn/wiki>
+If you have quentions about converting ncnn model, refer to ncnn wiki. https://github.com/Tencent/ncnn/wiki
 
-You can also convert the model with an online tool <https://convertmodel.com/> .
+You can also convert the model with an online tool https://convertmodel.com/ .
 
 ## Modify hyperparameters
 

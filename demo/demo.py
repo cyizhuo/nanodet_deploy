@@ -99,7 +99,8 @@ def main():
 
     load_config(cfg, args.config)
     logger = Logger(local_rank, use_tensorboard=False)
-    predictor = Predictor(cfg, args.model, logger, device="cuda:0")
+    # predictor = Predictor(cfg, args.model, logger, device="cuda:0")
+    predictor = Predictor(cfg, args.model, logger, device='cpu')
     logger.log('Press "Esc", "q" or "Q" to exit.')
     current_time = time.localtime()
     if args.demo == "image":
