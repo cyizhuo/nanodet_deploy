@@ -183,11 +183,13 @@ python tools/export_onnx.py --path [save_dir/log_dir]
 
 2、将 onnx 模型转为 ncnn 模型：
 
-使用在线工具转换：<https://convertmodel.com/>
+使用 `pnnx` 转换：<https://github.com/pnnx/pnnx>
 
-上传 `nanodet.onnx` 模型文件进行转换后，会生成 `xxx.bin` 和  `xxx.param` 两个文件供下载。
-
-![convert](docs/imgs/convert.png)
+```sh
+python -m pip install pnnx
+# pnnx [model_path] inputshape=[input_shape]
+pnnx nanodet.onnx inputshape=[1,3,416,416]
+```
 
 ### 3.2. 配置部署环境
 
@@ -223,7 +225,7 @@ make
 
 ### 3.4. 运行部署程序
 
-首先将  `xxx.bin` 和  `xxx.param` 改名为  `nanodet.bin` 和  `nanodet.param` 并放置在 `demo_ncnn` 文件夹下。
+首先将  `xxx.ncnn.bin` 和  `xxx.ncnn.param` 改名为  `nanodet.bin` 和  `nanodet.param` 并放置在 `demo_ncnn` 文件夹下。
 
 ```sh
 cd demo_ncnn/build
